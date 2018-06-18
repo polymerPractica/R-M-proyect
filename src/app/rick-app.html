@@ -1,0 +1,27 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+
+<dom-module id="rick-app">
+	<template>
+		<style>			
+		</style>
+
+		<h2>Hello Rick App!</h2>
+	</template>
+
+	<script>
+		(function rickApp(customElements){
+			'use strict';
+
+			class RickApp extends Polymer.Element {
+				static get is() { return 'rick-app'; }
+				static get properties() {
+					return {
+						prop: String
+					}
+				}
+			}
+
+			customElements.define(RickApp.is, RickApp);
+		})(window.customElements);
+	</script>
+</dom-module>

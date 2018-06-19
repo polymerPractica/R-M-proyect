@@ -35,19 +35,19 @@
 
 	  <app-drawer-layout>
 	    <app-drawer swipe-open slot="drawer">
-	    	<a href="all">
+	    	<a href="All">
 	        <paper-icon-item class="iconItem">
 	          <iron-icon class="grayIcon" icon="social:people-outline" slot="item-icon"></iron-icon>
 	          <span>All</span>
 	        </paper-icon-item>
 	       </a>
-	      <a href="alive">
+	      <a href="Alive">
 	        <paper-icon-item class="iconItem">
 	          <iron-icon class="grayIcon" icon="social:sentiment-satisfied" slot="item-icon"></iron-icon>
 	          <span>Alive</span>
 	        </paper-icon-item>
 	       </a>
-	       <a href="dead">
+	       <a href="Dead">
 	        <paper-icon-item class="iconItem">
 	          <iron-icon class="grayIcon" icon="social:sentiment-very-dissatisfied" slot="item-icon"></iron-icon>
 	          <span>Dead</span>
@@ -72,12 +72,12 @@
 	        </app-toolbar>
 	      </app-header>
 
-	      <iron-pages selected="{{data.page}}" attr-for-selected="page" fallback-selection="all">
-					<section page="all"><all-card characters="[[characters.results]]" current-character="{{currentCharacter}}"></all-card></section>
-					<section page="alive"><alive-card characters="[[characters.results]]" current-character="{{currentCharacter}}"></alive-card></section>
-					<section page="dead"><dead-card characters="[[characters.results]]" current-character="{{currentCharacter}}"></dead-card></section>
+	      <iron-pages selected="{{data.page}}" attr-for-selected="page" fallback-selection="All">
+					<section page="All"><all-card characters="[[characters.results]]" current-character="{{currentCharacter}}"></all-card></section>
+					<section page="Alive"><alive-card characters="[[characters.results]]" current-character="{{currentCharacter}}"></alive-card></section>
+					<section page="Dead"><dead-card characters="[[characters.results]]" current-character="{{currentCharacter}}"></dead-card></section>
 					<section page="unknown"><unknown-card characters="[[characters.results]]" current-character="{{currentCharacter}}"></unknown-card></section>
-					<section page="detail"><detail-card current-character="[[currentCharacter]]" band></detail-card></section>
+					<section page="Detail"><detail-card current-character="[[currentCharacter]]" band></detail-card></section>
 				</iron-pages>
 
 	      <iron-ajax url="https://rickandmortyapi.com/api/character" last-response="{{characters}}" auto></iron-ajax>

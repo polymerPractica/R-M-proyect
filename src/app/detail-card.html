@@ -1,37 +1,9 @@
 <link rel="import" href="/bower_components/polymer/polymer-element.html">
 <link rel="import" href="/bower_components/paper-button/paper-button.html">
 <link rel="import" href="/bower_components/iron-icons/iron-icons.html">
-
 <dom-module id="detail-card">
     <template>
-        <style>
-            #btn {
-                position: fixed;
-                
-            }
-
-            #card {
-                display: flex;
-                justify-content: space-around;
-                flex-direction: column;
-                margin-left: 10%;
-                align-items: center;
-            }
-
-            cat-text.green {
-
-                font-size: 24px;
-                color: black;
-                background-color: #eee;
-                padding: 8px;
-                margin-bottom: 10px;
-            }
-
-            .image{
-                border-radius: 15%;
-            }
-        </style>
-
+      <style include="style-module"></style>
 
         <template is="dom-if" if="{{band}}">
             <a href="{{currentCharacter.status}}">

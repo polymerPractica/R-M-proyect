@@ -15,130 +15,151 @@
 <link rel="import" href="/bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="/bower_components/iron-icons/social-icons.html">
 <link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="detail-card.html">
+
 
 <dom-module id="rick-app">
 	<template>
 		<style>
-	    app-header {
-	      background-color: #a9d3ea;
-	      color: white;
-	      --app-header-background-front-layer: {
-	        background-color: #e9d078;
-	      };
-	    }
-	    iron-list {
-	      background-color: var(--paper-grey-200, #eee);
-	      padding-bottom: 16px;
-	      @apply --layout-flex;
-	    }
-	    .item {
-	      @apply --layout-horizontal;
-	      margin: 16px 16px 0 16px;
-	      padding: 20px;
-	      border-radius: 8px;
-	      background-color: white;
-	      border: 1px solid #ddd;
-	    }
-	    .iconItem {
-	      color: #666;
-	    }
-	    .avatar {
-	      height: 40px;
-	      width: 40px;
-	      border-radius: 20px;
-	      box-sizing: border-box;
-	      background-color: #DDD;
-	    }
-	    .pad {
-	      padding: 0 16px;
-	      @apply --layout-flex;
-	      @apply --layout-vertical;
-	    }
-	    .primary {
-	      font-size: 16px;
-	      font-weight: bold;
-	    }
-	    .secondary {
-	      font-size: 14px;
-	    }
-	    .dim {
-	      color: gray;
-	    }
-	    .mainHeader [main-title] {
-	      font-weight: 400;
-	      margin: 0 0 0 50px;
-	    }
-	    .mainHeader [condensed-title] {
-	      font-weight: 400;
-	      margin-left: 30px;
-	    }
-	    .mainHeader [condensed-title] i {
-	      font-style: normal;
-	      font-weight: 100;
-	    }
-	    app-toolbar.tall {
-	      height: 100px;
-	    }
-	    app-drawer-layout:not([narrow]) [drawer-toggle] {
-	      display: none;
-	    }
-	  </style>
+			app-header {
+				background-color: #a9d3ea;
+				color: white;
+				--app-header-background-front-layer: {
+					background-color: #e9d078;
+				}
+				;
+			}
+
+			iron-list {
+				background-color: var(--paper-grey-200, #eee);
+				padding-bottom: 16px;
+				@apply --layout-flex;
+			}
+
+			.item {
+				@apply --layout-horizontal;
+				margin: 16px 16px 0 16px;
+				padding: 20px;
+				border-radius: 8px;
+				background-color: white;
+				border: 1px solid #ddd;
+			}
+
+			.iconItem {
+				color: #666;
+			}
+
+			.avatar {
+				height: 40px;
+				width: 40px;
+				border-radius: 20px;
+				box-sizing: border-box;
+				background-color: #DDD;
+			}
+
+			.pad {
+				padding: 0 16px;
+				@apply --layout-flex;
+				@apply --layout-vertical;
+			}
+
+			.primary {
+				font-size: 16px;
+				font-weight: bold;
+			}
+
+			.secondary {
+				font-size: 14px;
+			}
+
+			.dim {
+				color: gray;
+			}
+
+			.mainHeader [main-title] {
+				font-weight: 400;
+				margin: 0 0 0 50px;
+			}
+
+			.mainHeader [condensed-title] {
+				font-weight: 400;
+				margin-left: 30px;
+			}
+
+			.mainHeader [condensed-title] i {
+				font-style: normal;
+				font-weight: 100;
+			}
+
+			app-toolbar.tall {
+				height: 100px;
+			}
+
+			app-drawer-layout:not([narrow]) [drawer-toggle] {
+				display: none;
+			}
+		</style>
 
 		<app-location route="{{route}}"></app-location>
-		<app-route
-			route="{{route}}"
-			pattern="/:page"
-			data="{{data}}">
+		<app-route route="{{route}}" pattern="/:page" data="{{data}}">
 		</app-route>
 
-	  <app-drawer-layout>
-	    <app-drawer swipe-open slot="drawer">
-	    	<a href="all">
-	        <paper-icon-item class="iconItem">
-	          <iron-icon class="grayIcon" icon="social:people-outline" slot="item-icon"></iron-icon>
-	          <span>All</span>
-	        </paper-icon-item>
-	       </a>
-	      <a href="alive">
-	        <paper-icon-item class="iconItem">
-	          <iron-icon class="grayIcon" icon="social:sentiment-satisfied" slot="item-icon"></iron-icon>
-	          <span>Alive</span>
-	        </paper-icon-item>
-	       </a>
-	       <a href="dead">
-	        <paper-icon-item class="iconItem">
-	          <iron-icon class="grayIcon" icon="social:sentiment-very-dissatisfied" slot="item-icon"></iron-icon>
-	          <span>Dead</span>
-	        </paper-icon-item>
-	      </a>
-	      <a href="unknown">
-	        <paper-icon-item class="iconItem">
-	          <iron-icon class="grayIcon" icon="social:sentiment-neutral" slot="item-icon"></iron-icon>
-	          <span>Unknown</span>
-	        </paper-icon-item>
-	       </a>
-	    </app-drawer>
-	    <app-header-layout>
-	      <app-header class="mainHeader" condenses fixed effects="resize-title blend-background waterfall" slot="header">
-	        <app-toolbar>
-	          <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
-	          <h4 condensed-title>Rick and Morty App</h4>
-	          <paper-icon-button icon="search"></paper-icon-button>
-	        </app-toolbar>
-	        <app-toolbar class="tall">
-	          <h1 main-title>Rick and Morty App</h1>
-	        </app-toolbar>
-	      </app-header>
+		<app-drawer-layout>
+			<app-drawer swipe-open slot="drawer">
+				<a href="all">
+					<paper-icon-item class="iconItem">
+						<iron-icon class="grayIcon" icon="social:people-outline" slot="item-icon"></iron-icon>
+						<span>All</span>
+					</paper-icon-item>
+				</a>
+				<a href="alive">
+					<paper-icon-item class="iconItem">
+						<iron-icon class="grayIcon" icon="social:sentiment-satisfied" slot="item-icon"></iron-icon>
+						<span>Alive</span>
+					</paper-icon-item>
+				</a>
+				<a href="dead">
+					<paper-icon-item class="iconItem">
+						<iron-icon class="grayIcon" icon="social:sentiment-very-dissatisfied" slot="item-icon"></iron-icon>
+						<span>Dead</span>
+					</paper-icon-item>
+				</a>
+				<a href="unknown">
+					<paper-icon-item class="iconItem">
+						<iron-icon class="grayIcon" icon="social:sentiment-neutral" slot="item-icon"></iron-icon>
+						<span>Unknown</span>
+					</paper-icon-item>
+				</a>
+			</app-drawer>
+			<app-header-layout>
+				<app-header class="mainHeader" condenses fixed effects="resize-title blend-background waterfall" slot="header">
+					<app-toolbar>
+						<paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
+						<h4 condensed-title>Rick and Morty App</h4>
+						<paper-icon-button icon="search"></paper-icon-button>
+					</app-toolbar>
+					<app-toolbar class="tall">
+						<h1 main-title>Rick and Morty App</h1>
+					</app-toolbar>
+				</app-header>
 
-	      <iron-pages selected="{{data.page}}" attr-for-selected="page" fallback-selection="all">
-					<section page="all">All</section>
-					<section page="alive">Alive</section>
-					<section page="dead">Dead</section>
-					<section page="unknown">Unknown</section>
+				<iron-pages selected="{{data.page}}" attr-for-selected="page" fallback-selection="all">
+					<section page="all">All
+						<detail-card></detail-card>
+					</section>
+					<section page="alive">Alive
+						<detail-card></detail-card>
+					</section>
+					<section page="dead">Dead
+						<detail-card></detail-card>
+					</section>
+					<section page="unknown">Unknown
+						<detail-card></detail-card>
+					</section>
 				</iron-pages>
 
 
-	      <!-- <iron-list items="[[characters.results]]" as="item" scroll-target="document">
+				<!-- <iron-list items="[[characters.results]]" as="item" scroll-target="document">
 	        <template>
 	          <div>
 	            <div class="item" tabindex$="[[tabIndex]]">
@@ -153,13 +174,13 @@
 	        </template>
 	      </iron-list> -->
 
-	      <iron-ajax url="https://rickandmortyapi.com/api/character" last-response="{{characters}}" auto></iron-ajax>
-	    </app-header-layout>
-	  </app-drawer-layout>
+				<iron-ajax url="https://rickandmortyapi.com/api/character" last-response="{{characters}}" auto></iron-ajax>
+			</app-header-layout>
+		</app-drawer-layout>
 	</template>
 
 	<script>
-		(function rickApp(customElements){
+		(function rickApp(customElements) {
 			'use strict';
 
 			class RickApp extends Polymer.Element {

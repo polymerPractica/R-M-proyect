@@ -4,27 +4,52 @@
 
 <dom-module id="detail-card">
     <template>
-      <style>
-          #btn {
-              position: fixed;
-          }
-          #card {
-              display: flex;
-              justify-content: space-around;
-              margin-top: 30%;
-              margin-left: 10%;
-          }
-      </style>
+        <style>
+            #btn {
+                position: fixed;
+                
+            }
+
+            #card {
+                display: flex;
+                justify-content: space-around;
+                flex-direction: column;
+                margin-left: 10%;
+                align-items: center;
+            }
+
+            cat-text.green {
+
+                font-size: 24px;
+                color: black;
+                background-color: #eee;
+                padding: 8px;
+                margin-bottom: 10px;
+            }
+
+            .image{
+                border-radius: 15%;
+            }
+        </style>
+
+
         <template is="dom-if" if="{{band}}">
-            
+            <a href="{{currentCharacter.status}}">
             <paper-button class="pink" id="btn">
                 <iron-icon icon="arrow-back"></iron-icon>
             </paper-button>
+            </a>
             <div id="card">
-                <img src="{{currentCharacter.image}}">
-                <p>{{currentCharacter.name}}</p>
-                <p>{{currentCharacter.status}}</p> 
-                <p>{{currentCharacter.specie}}</p>
+                <img class="image" src="{{currentCharacter.image}}" height="300px" width="300px">
+                <cat-text class="green">
+                    {{currentCharacter.name}}
+                </cat-text>
+                <cat-text class="green">
+                    {{currentCharacter.status}}
+                </cat-text>
+                <cat-text class="green">
+                    {{currentCharacter.species}}
+                </cat-text>
             </div>
         </template>
     </template>

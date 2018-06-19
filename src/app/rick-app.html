@@ -15,6 +15,10 @@
 <link rel="import" href="/bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="/bower_components/iron-icons/social-icons.html">
 <link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="all-card.html">
+<link rel="import" href="alive-card.html">
+<link rel="import" href="dead-card.html">
+<link rel="import" href="unknown-card.html">
 
 <dom-module id="rick-app">
 	<template>
@@ -131,27 +135,11 @@
 	      </app-header>
 
 	      <iron-pages selected="{{data.page}}" attr-for-selected="page" fallback-selection="all">
-					<section page="all">All</section>
-					<section page="alive">Alive</section>
-					<section page="dead">Dead</section>
-					<section page="unknown">Unknown</section>
+					<section page="all"><all-card characters="[[characters.results]]"></all-card></section>
+					<section page="alive"><alive-card characters="[[characters.results]]"></alive-card></section>
+					<section page="dead"><dead-card characters="[[characters.results]]" ></dead-card></section>
+					<section page="unknown"><unknown-card characters="[[characters.results]]"></unknown-card></section>
 				</iron-pages>
-
-
-	      <!-- <iron-list items="[[characters.results]]" as="item" scroll-target="document">
-	        <template>
-	          <div>
-	            <div class="item" tabindex$="[[tabIndex]]">
-	              <img class="avatar" src="[[item.image]]">
-	              <div class="pad">
-	                <div class="primary">[[item.name]]</div>
-	                <div class="secondary">[[item.status]]</div>
-	                <div class="secondary dim">[[item.species]]</div>
-	              </div>
-	            </div>
-	          </div>
-	        </template>
-	      </iron-list> -->
 
 	      <iron-ajax url="https://rickandmortyapi.com/api/character" last-response="{{characters}}" auto></iron-ajax>
 	    </app-header-layout>
@@ -169,6 +157,7 @@
 						prop: String
 					}
 				}
+
 			}
 
 			customElements.define(RickApp.is, RickApp);

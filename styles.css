@@ -9,8 +9,9 @@ html {
 }
 
 body {
-  font-family: sans-serif;
-  height: 100%
+  margin: 0;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  background-color: #eee;
 }
 
 .container {

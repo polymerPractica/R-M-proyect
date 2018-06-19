@@ -47,7 +47,7 @@
       }
       </style>
       <template is="dom-repeat" items="[[characters]]">
-          <template is="dom-if" if="[[getTypeCharacter(item.status, 'Alive')]]" restamp="true">
+          <template is="dom-if" if="[[getTypeCharacter(item.status, 'Alive')]]">
             <div class="item">
               <img class="avatar" src="[[item.image]]">
               <div class="pad">

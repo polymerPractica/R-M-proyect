@@ -2,58 +2,17 @@
 
 <dom-module id="alive-card">
   <template>
-      <style>
-      app-header {
-        background-color: #a9d3ea;
-        color: white;
-        --app-header-background-front-layer: {
-          background-color: #e9d078;
-        };
-      }
-      iron-list {
-        background-color: var(--paper-grey-200, #eee);
-        padding-bottom: 16px;
-        @apply --layout-flex;
-      }
-      .item {
-        @apply --layout-horizontal;
-        margin: 16px 16px 0 16px;
-        padding: 20px;
-        border-radius: 8px;
-        background-color: white;
-        border: 1px solid #ddd;
-      }
-      .avatar {
-        height: 40px;
-        width: 40px;
-        border-radius: 20px;
-        box-sizing: border-box;
-        background-color: #DDD;
-      }
-      .pad {
-        padding: 0 16px;
-        @apply --layout-flex;
-        @apply --layout-vertical;
-      }
-      .primary {
-        font-size: 16px;
-        font-weight: bold;
-      }
-      .secondary {
-        font-size: 14px;
-      }
-      .dim {
-        color: gray;
-      }
-      </style>
-      <template is="dom-repeat" items="[[characters]]">
-          <template is="dom-if" if="[[getTypeCharacter(item.status, 'Alive')]]" restamp="true">
-            <div class="item">
-              <img class="avatar" src="[[item.image]]">
-              <div class="pad">
-                <a href="detail"><div class="primary" item-name="[[item.name]]" item-image="[[item.image]]" item-status="[[item.status]]" item-species="[[item.species]]" on-click="_currentCharacter">[[item.name]]</div></a>
-                <div class="secondary">[[item.status]]</div>
-                <div class="secondary dim">[[item.species]]</div>
+		<style include="style-module"></style>
+        <template is="dom-repeat" items="[[characters]]">
+            <template is="dom-if" if="[[getTypeCharacter(item.status, 'Alive')]]" restamp="true">
+            <div>
+              <div class="item" tabindex$="[[tabIndex]]">
+                <img class="avatar" src="[[item.image]]">
+                <div class="pad">
+                  <div class="primary">[[item.name]]</div>
+                  <div class="secondary">[[item.status]]</div>
+                  <div class="secondary dim">[[item.species]]</div>
+                </div>
               </div>
             </div>
           </template>

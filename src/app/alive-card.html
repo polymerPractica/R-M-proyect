@@ -15,8 +15,8 @@
                 </div>
               </div>
             </div>
-            </template>
           </template>
+        </template>
   </template>
 
   <script>
@@ -27,11 +27,23 @@
         static get properties() {
           return {
             prop: String,
-            characters: Array
+            characters: Array,
+            currentCharacter: {
+              type: Object,
+              notify: true
+            }
           }
         }
         getTypeCharacter(item, type) {
           return item == type;
+        }
+        _currentCharacter(e) {
+          this.set('currentCharacter', {
+            name: e.target.itemName,
+            status: e.target.itemStatus,
+            image: e.target.itemImage,
+            species: e.target.itemSpecies
+          });
         }
       }
       customElements.define(AliveCard.is, AliveCard);

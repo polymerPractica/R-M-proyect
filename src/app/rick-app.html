@@ -73,10 +73,11 @@
 	      </app-header>
 
 	      <iron-pages selected="{{data.page}}" attr-for-selected="page" fallback-selection="all">
-					<section page="all"><all-card characters="[[characters.results]]"></all-card></section>
-					<section page="alive"><alive-card characters="[[characters.results]]"></alive-card></section>
-					<section page="dead"><dead-card characters="[[characters.results]]" ></dead-card></section>
-					<section page="unknown"><unknown-card characters="[[characters.results]]"></unknown-card></section>
+					<section page="all"><all-card characters="[[characters.results]]" current-character="{{currentCharacter}}"></all-card></section>
+					<section page="alive"><alive-card characters="[[characters.results]]" current-character="{{currentCharacter}}"></alive-card></section>
+					<section page="dead"><dead-card characters="[[characters.results]]" current-character="{{currentCharacter}}"></dead-card></section>
+					<section page="unknown"><unknown-card characters="[[characters.results]]" current-character="{{currentCharacter}}"></unknown-card></section>
+					<section page="detail"><detail-card current-character="[[currentCharacter]]" band></detail-card></section>
 				</iron-pages>
 
 	      <iron-ajax url="https://rickandmortyapi.com/api/character" last-response="{{characters}}" auto></iron-ajax>

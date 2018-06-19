@@ -8,7 +8,7 @@
               <div class="item" tabindex$="[[tabIndex]]">
                 <img class="avatar" src="[[item.image]]">
                 <div class="pad">
-                  <div class="primary">[[item.name]]</div>
+                  <a href="detail"><div class="primary" item-name="[[item.name]]" item-image="[[item.image]]" item-status="[[item.status]]" item-species="[[item.species]]" on-click="_currentCharacter">[[item.name]]</div></a>
                   <div class="secondary">[[item.status]]</div>
                   <div class="secondary dim">[[item.species]]</div>
                 </div>
@@ -25,11 +25,23 @@
         static get properties() {
           return {
             prop: String,
-            characters: Array
+            characters: Array,
+            currentCharacter: {
+              type: Object,
+              notify: true
+            }
           }
         }
         getTypeCharacter(item, type) {
           return item == type;
+        }
+        _currentCharacter(e) {
+          this.set('currentCharacter', {
+            name: e.target.itemName,
+            status: e.target.itemStatus,
+            image: e.target.itemImage,
+            species: e.target.itemSpecies
+          });
         }
       }
       customElements.define(AllCard.is, AllCard);

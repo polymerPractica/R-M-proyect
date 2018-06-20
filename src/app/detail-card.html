@@ -1,48 +1,72 @@
 <link rel="import" href="/bower_components/polymer/polymer-element.html">
 <link rel="import" href="/bower_components/paper-button/paper-button.html">
+<link rel="import" href="/bower_components/paper-card/paper-card.html">
 <link rel="import" href="/bower_components/iron-icons/iron-icons.html">
 <dom-module id="detail-card">
     <template>
-      <style include="style-module"></style>
-
-        <template is="dom-if" if="{{band}}">
-            <a href="{{currentCharacter.status}}">
-            <paper-button class="pink" id="btn">
-                <iron-icon icon="arrow-back"></iron-icon>
-            </paper-button>
-            </a>
-            <div id="card">
-                <img class="image" src="{{currentCharacter.image}}" height="300px" width="300px">
-                <cat-text class="green">
-                    {{currentCharacter.name}}
-                </cat-text>
-                <cat-text class="green">
-                    {{currentCharacter.status}}
-                </cat-text>
-                <cat-text class="green">
-                    {{currentCharacter.species}}
-                </cat-text>
+      <style include="style-module">
+        .content-detail {
+          display: flex;
+          justify-content: center
+        }
+        paper-card {
+          margin: 30px;
+          width: 50%;
+        }
+        .card-content, .card-actions {
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+        }
+        .text {
+          font-size: 20px;
+          margin: 5px;
+        }
+      </style>
+      <a href="[[currentCharacter.status]]">
+        <paper-button class="pink" id="btn">
+          <iron-icon icon="arrow-back"></iron-icon>
+        </paper-button>
+      </a>
+      <div class="content-detail">
+        <paper-card>
+          <div class="card-content">
+            <div>
+              <img class="image" src="[[currentCharacter.image]]" height="300px" width="300px">
             </div>
-        </template>
+          </div>
+          <div class="card-actions">
+            <div class="text">
+              [[currentCharacter.name]]
+            </div>
+            <div class="text">
+              [[currentCharacter.status]]
+            </div>
+            <div class="text">
+              [[currentCharacter.species]]
+            </div>
+          </div>
+        </paper-card>
+      </div>
     </template>
     <script>
-        (function detailCard(customElements) {
+      (function detailCard(customElements) {
 
-            'use strict';
-            class DetailCard extends Polymer.Element {
-                static get is() { return "detail-card"; }
-                static get properties() {
-                    return {
-                        band: Boolean,
-                        currentCharacter: Object
-                    }
-                }
+        'use strict';
+        class DetailCard extends Polymer.Element {
+          static get is() { return "detail-card"; }
+          static get properties() {
+            return {
+              band: Boolean,
+              currentCharacter: Object
             }
-
-            customElements.define(DetailCard.is, DetailCard);
+          }
         }
 
-        )(window.customElements);
+        customElements.define(DetailCard.is, DetailCard);
+      }
+
+      )(window.customElements);
 
     </script>
 

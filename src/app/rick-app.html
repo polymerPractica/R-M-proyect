@@ -15,10 +15,7 @@
 <link rel="import" href="/bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="/bower_components/iron-icons/social-icons.html">
 <link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="all-card.html">
-<link rel="import" href="alive-card.html">
-<link rel="import" href="dead-card.html">
-<link rel="import" href="unknown-card.html">
+<link rel="import" href="characters-cards.html">
 <link rel="import" href="detail-card.html">
 <link rel="import" href="style-module.html">
 
@@ -73,13 +70,20 @@
 	      </app-header>
 
 	      <iron-pages selected="{{data.page}}" attr-for-selected="page" fallback-selection="All">
-					<section page="All"><all-card characters="[[characters.results]]" current-character="{{currentCharacter}}"></all-card></section>
-					<section page="Alive"><alive-card characters="[[characters.results]]" current-character="{{currentCharacter}}"></alive-card></section>
-					<section page="Dead"><dead-card characters="[[characters.results]]" current-character="{{currentCharacter}}"></dead-card></section>
-					<section page="unknown"><unknown-card characters="[[characters.results]]" current-character="{{currentCharacter}}"></unknown-card></section>
+					<section page="All">
+						<characters-cards characters="[[characters.results]]" current-character="{{currentCharacter}}" all></characters-cards>
+					</section>
+					<section page="Alive">
+						<characters-cards characters="[[characters.results]]" current-character="{{currentCharacter}}" status="Alive"></characters-cards>
+					</section>
+					<section page="Dead">
+						<characters-cards characters="[[characters.results]]" current-character="{{currentCharacter}}" status="Dead"></characters-cards>
+					</section>
+					<section page="unknown">
+						<characters-cards characters="[[characters.results]]" current-character="{{currentCharacter}}" status="unknown"></characters-cards>
+					</section>
 					<section page="Detail"><detail-card current-character="[[currentCharacter]]" band></detail-card></section>
 				</iron-pages>
-
 	      <iron-ajax url="https://rickandmortyapi.com/api/character" last-response="{{characters}}" auto></iron-ajax>
 	    </app-header-layout>
 	  </app-drawer-layout>

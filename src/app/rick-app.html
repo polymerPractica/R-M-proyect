@@ -82,7 +82,9 @@
 					<section page="unknown">
 						<characters-cards characters="[[characters.results]]" current-character="{{currentCharacter}}" status="unknown"></characters-cards>
 					</section>
-					<section page="Detail"><detail-card current-character="[[currentCharacter]]" band></detail-card></section>
+					<section page="Detail">
+						<detail-card current-character="[[currentCharacter]]"></detail-card>
+					</section>
 				</iron-pages>
 	      <iron-ajax url="https://rickandmortyapi.com/api/character" last-response="{{characters}}" auto></iron-ajax>
 	    </app-header-layout>
@@ -100,7 +102,6 @@
 						prop: String
 					}
 				}
-
 			}
 
 			customElements.define(RickApp.is, RickApp);

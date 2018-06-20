@@ -2,52 +2,137 @@
 <link rel="import" href="/bower_components/paper-button/paper-button.html">
 <link rel="import" href="/bower_components/paper-card/paper-card.html">
 <link rel="import" href="/bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="/bower_components/paper-dialog/paper-dialog.html">
 <dom-module id="detail-card">
     <template>
       <style include="style-module">
         .content-detail {
           display: flex;
-          justify-content: center
+          justify-content: center;
+          flex-direction: column;
+          margin: 10px;
         }
-        paper-card {
-          margin: 30px;
-          width: 50%;
+        paper-card.horizontal {
+          width: 100%;
+          display: flex;
         }
-        .card-content, .card-actions {
+        .card-content, .card-actions, .label {
           display: flex;
           align-items: center;
           flex-direction: column;
+          justify-content: center;
+          width: 100%;
+        }
+        .header-episodes {
+          display: flex;
+          align-items: center;
+          background: #c8d2b5;
+          color: white;
+          font-size: 20px;
+          width: 100%;
         }
         .text {
-          font-size: 20px;
+          font-size: 16px;
           margin: 5px;
         }
+        .header-card {
+          display: flex;
+          align-items: center;
+          background: #a9d3ea;
+          color: white;
+          font-size: 30px;
+          width: 100%;
+        }
+        .margin-10 {
+          margin: 10px;
+        }
+        a { color: white; }
+        .name-character {
+          display: flex;
+          width: 100%;
+          justify-content: center;
+        }
       </style>
-      <a href="[[currentCharacter.status]]">
-        <paper-button class="pink" id="btn">
-          <iron-icon icon="arrow-back"></iron-icon>
-        </paper-button>
-      </a>
       <div class="content-detail">
-        <paper-card>
-          <div class="card-content">
-            <div>
-              <img class="image" src="[[currentCharacter.image]]" height="300px" width="300px">
+        <paper-card class="horizontal">
+          <div class="header-card">
+            <div class="arrow-back">
+              <a href="[[currentCharacter.status]]">
+                <paper-button class="btn-back">
+                  <iron-icon icon="arrow-back"></iron-icon>
+                </paper-button>
+              </a>
             </div>
-          </div>
-          <div class="card-actions">
-            <div class="text">
+            <div class="name-character">
               [[currentCharacter.name]]
-            </div>
-            <div class="text">
-              [[currentCharacter.status]]
-            </div>
-            <div class="text">
-              [[currentCharacter.species]]
             </div>
           </div>
         </paper-card>
+        <paper-card class="horizontal">
+          <div class="card-content">
+            <div>
+              <img src="[[currentCharacter.image]]" height="300px" width="300px">
+            </div>
+          </div>
+          <div class="card-actions">
+            <div class="label margin-10">
+              <div class="info">
+                # EPISODES
+              </div>
+              <div class="text">
+                [[getNumberEpisodies(currentCharacter.episode)]]
+              </div>
+            </div>
+            <div class="label margin-10">
+              <div class="info">
+                SPECIES
+              </div>
+              <div class="text">
+                [[currentCharacter.species]]
+              </div>
+            </div>
+            <div class="label margin-10">
+              <div class="info">
+                OIRIGIN
+              </div>
+              <div class="text">
+                [[currentCharacter.origin.name]]
+              </div>
+            </div>
+            <div class="label margin-10">
+              <div class="info">
+                LAST LOCATION
+              </div>
+              <div class="text">
+                [[currentCharacter.location.name]]
+              </div>
+            </div>
+          </div>
+        </paper-card>
+        <paper-card class="margin-10">
+          <div class="header-episodes">
+            <div class="name-character">
+              Episodes
+            </div>
+          </div>
+          <div class="card-actions">
+            <template is="dom-repeat" items="[[currentCharacter.episode]]">
+              <p on-click="getDetailEpisode" url-episode="[[item]]">[[item]]</p>
+            </template>
+          </div>
+        </paper-card>
       </div>
+      <paper-dialog id="modal">
+        <div class="content-modal">
+          <p>[[episodeDetail.name]]</p>
+          <p>[[episodeDetail.air_date]]</p>
+          <p>[[episodeDetail.episode]]</p>
+        </div>
+        <div class="buttons">
+          <paper-button autofocus dialog-confirm>Aceptar</paper-button>
+        </div>
+      </paper-dialog>
+      <iron-ajax url="[[urlEpisode]]" last-response="{{episodeDetail}}" id="getDetailEpisode"></iron-ajax>
     </template>
     <script>
       (function detailCard(customElements) {
@@ -60,6 +145,22 @@
               band: Boolean,
               currentCharacter: Object
             }
+          }
+          static get observers() {
+            return [
+              'currentCharacterObserver(currentCharacter)'
+            ]
+          }
+          currentCharacterObserver(currentCharacter) {
+            console.log(currentCharacter);
+          }
+          getDetailEpisode(e) {
+            this.set('urlEpisode', e.target.urlEpisode);
+            this.$.getDetailEpisode.generateRequest();
+            this.$.modal.open();
+          }
+          getNumberEpisodies(episodes) {
+            return episodes.length;
           }
         }
 

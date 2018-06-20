@@ -1,0 +1,69 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="characters-cards">
+  <template>
+		<style include="style-module"></style>
+    <template is="dom-repeat" items="[[characters]]">
+      <template is="dom-if" if="[[getTypeCharacter(item.status, status)]]">
+        <div>
+          <div class="item" tabindex$="[[tabIndex]]">
+            <img class="avatar" src="[[item.image]]">
+            <div class="pad">
+              <a href="Detail"><div class="primary" item-name="[[item.name]]" item-image="[[item.image]]" item-status="[[item.status]]" item-species="[[item.species]]" on-click="_currentCharacter">[[item.name]]</div></a>
+              <div class="secondary">[[item.status]]</div>
+              <div class="secondary dim">[[item.species]]</div>
+            </div>
+          </div>
+        </div>
+      </template>
+      <template is="dom-if" if="[[all]]">
+        <div>
+          <div class="item" tabindex$="[[tabIndex]]">
+            <img class="avatar" src="[[item.image]]">
+            <div class="pad">
+              <a href="Detail"><div class="primary" item-name="[[item.name]]" item-image="[[item.image]]" item-status="[[item.status]]" item-species="[[item.species]]" on-click="_currentCharacter">[[item.name]]</div></a>
+              <div class="secondary">[[item.status]]</div>
+              <div class="secondary dim">[[item.species]]</div>
+            </div>
+          </div>
+        </div>
+      </template>
+    </template>
+  </template>
+
+  <script>
+    (function charactersCards(customElements) {
+      'use strict';
+      class CharactersCards extends Polymer.Element{
+        static get is() {return 'characters-cards'; }
+        static get properties() {
+          return {
+            prop: String,
+            characters: Array,
+            all: Boolean,
+            status: {
+              type: String,
+              value() { return ''; }
+            },
+            currentCharacter: {
+              type: Object,
+              notify: true
+            }
+          }
+        }
+        getTypeCharacter(item, type) {
+          return item == type;
+        }
+        _currentCharacter(e) {
+          this.set('currentCharacter', {
+            name: e.target.itemName,
+            status: e.target.itemStatus,
+            image: e.target.itemImage,
+            species: e.target.itemSpecies
+          });
+        }
+      }
+      customElements.define(CharactersCards.is, CharactersCards);
+    })(window.customElements);
+  </script>
+</dom-module>

@@ -14,7 +14,9 @@
     "paper-button": "PolymerElements/paper-button#^2.1.1",
     "cat-text": "the-catalin/cat-text#^0.7.4",
     "paper-card": "PolymerElements/paper-card#^2.1.0",
-    "paper-dialog": "PolymerElements/paper-dialog#^2.1.1"
+    "paper-dialog": "PolymerElements/paper-dialog#^2.1.1",
+    "iron-collapse": "PolymerElements/iron-collapse#^2.2.1",
+    "paper-toggle-button": "PolymerElements/paper-toggle-button#^2.1.1"
   },
   "devDependencies": {
     "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"

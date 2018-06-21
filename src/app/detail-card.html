@@ -3,6 +3,9 @@
 <link rel="import" href="/bower_components/paper-card/paper-card.html">
 <link rel="import" href="/bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="/bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="/bower_components/iron-collapse/iron-collapse.html">
+<link rel = "import" href = "/bower_components/iron-collapse/iron-collapse.html">
+<link rel = "import" href = "/bower_components/paper-toggle-button/paper-toggle-button.html">
 <dom-module id="detail-card">
     <template>
       <style include="style-module">
@@ -51,6 +54,11 @@
           display: flex;
           width: 100%;
           justify-content: center;
+        }
+
+        .collapse-content {
+          padding: 15px;
+          border: 1px solid #dedede;
         }
       </style>
       <div class="content-detail">
@@ -114,12 +122,15 @@
             <div class="name-character">
               Episodes
             </div>
+            <paper-toggle-button checked = "{{opened}}" style="float:right;"></paper-toggle-button>
           </div>
-          <div class="card-actions">
-            <template is="dom-repeat" items="[[currentCharacter.episode]]">
-              <p on-click="getDetailEpisode" url-episode="[[item]]">[[item]]</p>
-            </template>
-          </div>
+          <iron-collapse id="collapse" opened = "[[opened]]">
+            <div class="card-actions">
+              <template is="dom-repeat" items="[[currentCharacter.episode]]">
+                <div on-click="getDetailEpisode" url-episode="[[item]]">[[item]]</div>
+              </template>
+            </div>
+          </iron-collapse>
         </paper-card>
       </div>
       <paper-dialog id="modal">
@@ -133,6 +144,10 @@
         </div>
       </paper-dialog>
       <iron-ajax url="[[urlEpisode]]" last-response="{{episodeDetail}}" id="getDetailEpisode"></iron-ajax>
+
+
+
+
     </template>
     <script>
       (function detailCard(customElements) {

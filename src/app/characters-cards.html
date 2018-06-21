@@ -5,26 +5,22 @@
 		<style include="style-module"></style>
     <template is="dom-repeat" items="[[characters]]">
       <template is="dom-if" if="[[getTypeCharacter(item.status, status)]]">
-        <div>
-          <div class="item" tabindex$="[[tabIndex]]">
-            <img class="avatar" src="[[item.image]]">
-            <div class="pad">
-              <a href="Detail"><div class="primary" item-name="[[item.name]]" item-image="[[item.image]]" item-status="[[item.status]]" item-species="[[item.species]]" on-click="_currentCharacter">[[item.name]]</div></a>
-              <div class="secondary">[[item.status]]</div>
-              <div class="secondary dim">[[item.species]]</div>
-            </div>
+        <div class="item">
+          <img class="avatar" src="[[item.image]]">
+          <div class="pad">
+            <a href="Detail"><div class="primary" item-id="[[item.id]]" item-name="[[item.name]]" item-episode="[[item.episode]]" item-location="[[item.location]]" item-origin="[[item.origin]]" item-image="[[item.image]]" item-status="[[item.status]]" item-species="[[item.species]]" on-click="_currentCharacter">[[item.name]]</div></a>
+            <div class="secondary">[[item.status]]</div>
+            <div class="secondary dim">[[item.species]]</div>
           </div>
         </div>
       </template>
       <template is="dom-if" if="[[all]]">
-        <div>
-          <div class="item" tabindex$="[[tabIndex]]">
-            <img class="avatar" src="[[item.image]]">
-            <div class="pad">
-              <a href="Detail"><div class="primary" item-name="[[item.name]]" item-image="[[item.image]]" item-status="[[item.status]]" item-species="[[item.species]]" on-click="_currentCharacter">[[item.name]]</div></a>
-              <div class="secondary">[[item.status]]</div>
-              <div class="secondary dim">[[item.species]]</div>
-            </div>
+        <div class="item">
+          <img class="avatar" src="[[item.image]]">
+          <div class="pad">
+            <a href="Detail"><div class="primary" item-id="[[item.id]]" item-name="[[item.name]]" item-episode="[[item.episode]]" item-location="[[item.location]]" item-origin="[[item.origin]]" item-image="[[item.image]]" item-status="[[item.status]]" item-species="[[item.species]]" on-click="_currentCharacter">[[item.name]]</div></a>
+            <div class="secondary">[[item.status]]</div>
+            <div class="secondary dim">[[item.species]]</div>
           </div>
         </div>
       </template>
@@ -38,7 +34,6 @@
         static get is() {return 'characters-cards'; }
         static get properties() {
           return {
-            prop: String,
             characters: Array,
             all: Boolean,
             status: {
@@ -55,7 +50,12 @@
           return item == type;
         }
         _currentCharacter(e) {
+          console.log(this.characters);
           this.set('currentCharacter', {
+            id: e.target.itemId,
+            episode: e.target.itemEpisode,
+            location: e.target.itemLocation,
+            origin: e.target.itemOrigin,
             name: e.target.itemName,
             status: e.target.itemStatus,
             image: e.target.itemImage,

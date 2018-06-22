@@ -8,7 +8,7 @@
 <link rel = "import" href = "/bower_components/paper-toggle-button/paper-toggle-button.html">
 <dom-module id="detail-card">
     <template>
-      <style include="style-module">
+      <style>
         .content-detail {
           display: flex;
           justify-content: center;
@@ -55,10 +55,13 @@
           width: 100%;
           justify-content: center;
         }
-
-        .collapse-content {
-          padding: 15px;
-          border: 1px solid #dedede;
+        .episode {
+          padding: 5px;
+          display: flex;
+          font-size: 18px;
+          justify-content: center;
+          border: 1px solid #c8d3b5;
+          background-color: #9e9e9e00;
         }
       </style>
       <div class="content-detail">
@@ -122,12 +125,12 @@
             <div class="name-character">
               Episodes
             </div>
-            <paper-toggle-button checked = "{{opened}}" style="float:right;"></paper-toggle-button>
+            <paper-icon-button icon="expand-more" id="iconCollapse" title="more info" on-click="_toggle" style="float:right;"></paper-icon-button>
           </div>
-          <iron-collapse id="collapse" opened = "[[opened]]">
-            <div class="card-actions">
+          <iron-collapse id="collapse" opened="[[opened]]">
+            <div class="episodies-list">
               <template is="dom-repeat" items="[[currentCharacter.episode]]">
-                <div on-click="getDetailEpisode" url-episode="[[item]]">[[item]]</div>
+                <div on-click="getDetailEpisode" url-episode="[[item]]" class="episode">Episode: [[getStringEpisode(item)]]</div>
               </template>
             </div>
           </iron-collapse>
@@ -135,19 +138,15 @@
       </div>
       <paper-dialog id="modal">
         <div class="content-modal">
-          <p>[[episodeDetail.name]]</p>
-          <p>[[episodeDetail.air_date]]</p>
-          <p>[[episodeDetail.episode]]</p>
+          <p>Name: [[episodeDetail.name]]</p>
+          <p>Air Date: [[episodeDetail.air_date]]</p>
+          <p>Episode: [[episodeDetail.episode]]</p>
         </div>
         <div class="buttons">
           <paper-button autofocus dialog-confirm>Aceptar</paper-button>
         </div>
       </paper-dialog>
       <iron-ajax url="[[urlEpisode]]" last-response="{{episodeDetail}}" id="getDetailEpisode"></iron-ajax>
-
-
-
-
     </template>
     <script>
       (function detailCard(customElements) {
@@ -161,21 +160,22 @@
               currentCharacter: Object
             }
           }
-          static get observers() {
-            return [
-              'currentCharacterObserver(currentCharacter)'
-            ]
-          }
-          currentCharacterObserver(currentCharacter) {
-            console.log(currentCharacter);
-          }
           getDetailEpisode(e) {
             this.set('urlEpisode', e.target.urlEpisode);
             this.$.getDetailEpisode.generateRequest();
             this.$.modal.open();
           }
+          getStringEpisode(episodeUrl) {
+            return episodeUrl.substr(episodeUrl.indexOf('episode/')+8, episodeUrl.length); 
+          }
           getNumberEpisodies(episodes) {
             return episodes.length;
+          }
+          _toggle() {
+            let collapse = this.$.collapse;
+            let iconButton = this.$.iconCollapse;
+            iconButton.icon = collapse.opened ? 'expand-more': 'expand-less';
+            collapse.toggle();
           }
         }
 
